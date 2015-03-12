@@ -8,8 +8,12 @@ public class Camera {
 	private OrthographicCamera camera;
 	
 	public Camera(){
-		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		camera.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		this(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+	}
+	
+	public Camera(int width, int height){
+		camera = new OrthographicCamera(width, height);
+		camera.setToOrtho(true, width, height);
 		camera.update();
 	}
 	
@@ -17,7 +21,7 @@ public class Camera {
 		camera.update();
 	}
 	
-	public void setBatchProjection(SpriteBatch spriteBatch){
+	public void setSpriteBatchProjection(SpriteBatch spriteBatch){
 		spriteBatch.setProjectionMatrix(camera.combined);
 	}
 }
