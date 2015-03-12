@@ -2,6 +2,7 @@ package com.alexfr.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Camera {
 	private OrthographicCamera camera;
@@ -9,5 +10,14 @@ public class Camera {
 	public Camera(){
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		camera.update();
+	}
+	
+	public void update(){
+		camera.update();
+	}
+	
+	public void setBatchProjection(SpriteBatch spriteBatch){
+		spriteBatch.setProjectionMatrix(camera.combined);
 	}
 }

@@ -1,45 +1,20 @@
 package com.alexfr.game;
 
-import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 
-public class Character implements ApplicationListener {
-	Texture img;
-	SpriteBatch batch;
+public class Character {
 	
-	@Override
-	public void create() {
-		img = new Texture("badlogic.jpg");
-		batch = new SpriteBatch();
+	private Vector2 position;
+	
+	public Character() {
+		position = new Vector2(0,0);
+	}
+	
+	public Vector2 getPosition(){
+		return position;
 	}
 
-	@Override
-	public void resize(int width, int height) {
-
-	}
-
-	@Override
-	public void render() {
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
-	}
-
-	@Override
-	public void pause() {
+	public void dispose() {
 		
 	}
-
-	@Override
-	public void resume() {
-
-	}
-
-	@Override
-	public void dispose() {
-		img.dispose();
-		batch.dispose();
-	}
-
 }

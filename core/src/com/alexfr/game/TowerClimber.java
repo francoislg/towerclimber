@@ -9,13 +9,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class TowerClimber extends ApplicationAdapter {
 	SpriteBatch batch;
 	Character character;
+	CharacterRenderer characterRenderer;
 	Camera camera;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		character = new Character();
-		character.create();
+		characterRenderer = new CharacterRenderer(character);
 		camera = new Camera();
 	}
 
@@ -23,6 +24,10 @@ public class TowerClimber extends ApplicationAdapter {
 	public void render () {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		character.render();
+		camera.update();
+		camera.setBatchProjection(batch);
+		batch.begin();
+		characterRenderer.render(batch);
+		batch.end();
 	}
 }
