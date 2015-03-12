@@ -13,8 +13,4 @@ public class Character {
 	public Vector2 getPosition(){
 		return position;
 	}
-
-	public void dispose() {
-		
-	}
 }

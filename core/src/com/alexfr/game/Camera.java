@@ -21,7 +21,7 @@ public class Camera {
 		camera.update();
 	}
 	
-	public void setSpriteBatchProjection(SpriteBatch spriteBatch){
-		spriteBatch.setProjectionMatrix(camera.combined);
+	public void setSpriteBatchProjection(SpriteBatch batch){
+		batch.setProjectionMatrix(camera.combined);
 	}
 }

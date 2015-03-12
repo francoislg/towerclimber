@@ -1,24 +1,22 @@
 package com.alexfr.game;
 
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 public class CharacterRenderer implements Renderer {
-	TextureRegion img;
+	Sprite sprite;
 	Character character;
 	
-	public CharacterRenderer(Character character){
+	public CharacterRenderer(Character character, CharactersTextureAtlas charactersTextureAtlas){
 		this.character = character;
-		Texture texture = new Texture("badlogic.jpg");
-		img = new TextureRegion(texture, 0, 0, texture.getWidth(), texture.getHeight());
-		img.flip(false, true);
+		sprite = charactersTextureAtlas.createSprite("character");
 	}
 
 	@Override
-	public void render(SpriteBatch spriteBatch) {
+	public void render(SpriteBatch batch) {
 		Vector2 position = character.getPosition();
-		spriteBatch.draw(img, position.x, position.y);
+		sprite.setPosition(position.x, position.y);
+		sprite.draw(batch);
 	}
 }
