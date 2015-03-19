@@ -2,14 +2,17 @@ package com.alexfr.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 
 public class TowerClimber extends ApplicationAdapter {
 	GameWorld gameWorld;
+	FPSLogger fpsLogger;
 	
 	@Override
 	public void create () {
 		gameWorld = new GameWorld();
+		fpsLogger = new FPSLogger();
 	}
 
 	@Override
@@ -17,5 +20,6 @@ public class TowerClimber extends ApplicationAdapter {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		gameWorld.render();
+		fpsLogger.log();
 	}
 }
