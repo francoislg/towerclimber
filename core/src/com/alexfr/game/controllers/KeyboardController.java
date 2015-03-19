@@ -10,6 +10,7 @@ public class KeyboardController implements GameController, InputProcessor {
 	private Controllable controllable;
 	private int leftKey = Keys.LEFT;
 	private int rightKey = Keys.RIGHT;
+	private int jumpKey = Keys.UP;
 	private PressableKeysHandler pressableKeys;
 	
 	public KeyboardController(Controllable controllable){
@@ -24,6 +25,9 @@ public class KeyboardController implements GameController, InputProcessor {
 		}
 		if(pressableKeys.isPressed(rightKey)){
 			controllable.moveRight();
+		}
+		if(pressableKeys.isPressed(jumpKey)){
+			controllable.jump();
 		}
 	}
 	

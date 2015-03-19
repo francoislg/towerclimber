@@ -9,6 +9,7 @@ public class Character implements Controllable {
 	private Vector2 position;
 	private Vector2 acceleration;
 	private final Vector2 speed = new Vector2(0.1f,0.1f);
+	private final float jumpSpeed = 5;
 	private final Vector2 maximumSpeed = new Vector2(1,5);
 	private final Vector2 gravity = new Vector2(0,0.1f);
 	
@@ -22,7 +23,9 @@ public class Character implements Controllable {
 	}
 	
 	public void jump(){
-		
+		if(acceleration.y == 0){
+			acceleration.add(0, jumpSpeed);
+		}
 	}
 	
 	public Vector2 getPosition(){
@@ -49,7 +52,7 @@ public class Character implements Controllable {
 	
 	private void bounceSomewhere(){
 		if(position.y < -200 && acceleration.y < 0){
-			float whateverFriction = 0.5f;
+			float whateverFriction = 0.8f;
 			acceleration.set(acceleration.x, Math.max(0,-acceleration.y-whateverFriction));
 		}
 	}
