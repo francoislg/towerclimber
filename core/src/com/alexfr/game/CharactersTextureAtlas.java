@@ -10,15 +10,13 @@ public class CharactersTextureAtlas {
 	private Texture tempTexture;
 	
 	public CharactersTextureAtlas(){
-		tempTexture = new Texture("badlogic.jpg");
+		tempTexture = new Texture("characters/badlogic.jpg");
 		tempSprite = new Sprite(tempTexture);
+		tempSprite.flip(false, true);
 	}
 	
 	public Sprite createSprite(String name){
 		return tempSprite;
-		/*Sprite sprite = textureAtlas.createSprite(name);
-		sprite.flip(false, true);
-		return sprite;*/
 	}
 	
 	public void dispose(){
