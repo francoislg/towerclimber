@@ -10,7 +10,7 @@ public class CharactersTextureAtlas {
 	private Texture tempTexture;
 	
 	public CharactersTextureAtlas(){
-		tempTexture = new Texture("badlogic");
+		tempTexture = new Texture("badlogic.jpg");
 		tempSprite = new Sprite(tempTexture);
 	}
 	

@@ -8,12 +8,23 @@ import com.badlogic.gdx.InputProcessor;
 public class KeyboardController implements GameController, InputProcessor {
 	
 	private Controllable controllable;
-	private int jumpKey = Keys.UP;
 	private int leftKey = Keys.LEFT;
 	private int rightKey = Keys.RIGHT;
+	private PressableKeysHandler pressableKeys;
 	
 	public KeyboardController(Controllable controllable){
+		pressableKeys = new PressableKeysHandler();
+		input.setInputProcessor(this);
 		this.controllable = controllable;
+	}
+	
+	public void update(){
+		if(pressableKeys.isPressed(leftKey)){
+			controllable.moveLeft();
+		}
+		if(pressableKeys.isPressed(rightKey)){
+			controllable.moveRight();
+		}
 	}
 	
 	@Override
@@ -23,20 +34,13 @@ public class KeyboardController implements GameController, InputProcessor {
 
 	@Override
 	public boolean keyDown(int keycode) {
-		if(input.isKeyPressed(jumpKey)){
-			controllable.jump();
-		}
-		if(input.isKeyPressed(leftKey)){
-			controllable.moveLeft();
-		}
-		if(input.isKeyPressed(rightKey)){
-			controllable.moveRight();
-		}
+		pressableKeys.updateKeyDown(keycode);
 		return false;
 	}
 
 	@Override
 	public boolean keyUp(int keycode) {
+		pressableKeys.updateKeyUp(keycode);
 		return false;
 	}
 
