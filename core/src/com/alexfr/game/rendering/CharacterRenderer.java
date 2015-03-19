@@ -18,7 +18,7 @@ public class CharacterRenderer implements Renderer {
 	@Override
 	public void render(SpriteBatch batch) {
 		Vector2 position = character.getPosition();
-		sprite.setPosition(position.x, position.y);
+		sprite.setPosition(-position.x, position.y);
 		sprite.draw(batch);
 	}
 }
