@@ -1,6 +1,6 @@
 package com.alexfr.game;
 
-import com.alexfr.game.Characters.Character;
+import com.alexfr.game.characters.Character;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

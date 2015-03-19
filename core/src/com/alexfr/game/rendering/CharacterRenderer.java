@@ -1,7 +1,7 @@
 package com.alexfr.game.rendering;
 
 import com.alexfr.game.CharactersTextureAtlas;
-import com.alexfr.game.Characters.Character;
+import com.alexfr.game.characters.Character;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -12,7 +12,7 @@ public class CharacterRenderer implements Renderer {
 	
 	public CharacterRenderer(Character character, CharactersTextureAtlas charactersTextureAtlas){
 		this.character = character;
-		sprite = charactersTextureAtlas.createSprite("character");
+		sprite = charactersTextureAtlas.createSprite("badlogic");
 	}
 
 	@Override

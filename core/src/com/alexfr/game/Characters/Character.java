@@ -1,4 +1,4 @@
-package com.alexfr.game.Characters;
+package com.alexfr.game.characters;
 
 import com.alexfr.game.VectorUtils;
 import com.alexfr.game.controllers.Controllable;
