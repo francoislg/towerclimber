@@ -14,7 +14,7 @@ public class Character implements Controllable {
 	private final Vector2 gravity = new Vector2(0,0.1f);
 	
 	public Character() {
-		position = new Vector2(0,0);
+		position = new Vector2(20,20);
 		acceleration = new Vector2(0,0);
 	}
 	
@@ -24,7 +24,7 @@ public class Character implements Controllable {
 	
 	public void jump(){
 		if(acceleration.y == 0){
-			acceleration.add(0, jumpSpeed);
+			acceleration.add(0, -jumpSpeed);
 		}
 	}
 	
@@ -44,16 +44,16 @@ public class Character implements Controllable {
 
 	@Override
 	public void update() {
-		acceleration.sub(gravity);
+		acceleration.add(gravity);
 		bounceSomewhere();
 		VectorUtils.ClampVector(acceleration, maximumSpeed);
 		position.add(acceleration);
 	}
 	
 	private void bounceSomewhere(){
-		if(position.y < -200 && acceleration.y < 0){
+		if(position.y > 200 && acceleration.y > 0){
 			float whateverFriction = 0.8f;
-			acceleration.set(acceleration.x, Math.max(0,-acceleration.y-whateverFriction));
+			acceleration.set(acceleration.x, Math.min(0, whateverFriction-acceleration.y));
 		}
 	}
 }
