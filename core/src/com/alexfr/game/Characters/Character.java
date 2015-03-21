@@ -15,10 +15,9 @@ public class Character implements Controllable, Renderable {
 	private final Vector2 boxSize = new Vector2(size.x/2, size.y/2);
 	private final Vector2 speed = new Vector2(1, 5);
 	private final float jumpForce = 10;
-	Body body;
-	
-	Fixture bodyFixture;
-	Fixture feetFixture;
+	private Body body;
+	private Fixture bodyFixture;
+	private Fixture feetFixture;
 	
 	public Character(World world) {
         body = new BodyBuilder().thatIsDynamic().buildIn(world);
