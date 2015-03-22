@@ -7,7 +7,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class Platform {
-	Body body;
+	private Body body;
 
 	public Platform(World world, Vector2 position, Vector2 size) {
 		body = new BodyBuilder().thatIsStatic().atPosition(position).buildIn(world);

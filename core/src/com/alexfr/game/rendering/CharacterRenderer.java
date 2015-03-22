@@ -6,16 +6,16 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 public class CharacterRenderer implements Renderer {
-	Sprite sprite;
-	Renderable character;
+	private Sprite sprite;
+	private Renderable character;
 	private Vector2 size;
 	private Vector2 center;
-	
-	public CharacterRenderer(Renderable character, CharactersTextureAtlas charactersTextureAtlas){
+
+	public CharacterRenderer(Renderable character, CharactersTextureAtlas charactersTextureAtlas) {
 		this.character = character;
 		size = character.getSize();
-		center = new Vector2(size.x/2 , size.y/2);
-		
+		center = new Vector2(size.x / 2, size.y / 2);
+
 		sprite = charactersTextureAtlas.createSprite("badlogic");
 		sprite.setSize(size.x, size.y);
 		sprite.setOrigin(center.x, center.y);

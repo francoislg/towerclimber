@@ -6,17 +6,17 @@ import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 
 public class TowerClimber extends ApplicationAdapter {
-	GameWorld gameWorld;
-	FPSLogger fpsLogger;
-	
+	private GameWorld gameWorld;
+	private FPSLogger fpsLogger;
+
 	@Override
-	public void create () {
+	public void create() {
 		gameWorld = new GameWorld();
 		fpsLogger = new FPSLogger();
 	}
 
 	@Override
-	public void render () {
+	public void render() {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		gameWorld.render();

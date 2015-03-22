@@ -11,14 +11,14 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class GameWorld {
-	SpriteBatch batch;
-	Character character;
-	CharacterRenderer characterRenderer;
-	Camera camera;
-	CharactersTextureAtlas charactersTextureAtlas;
-	GameController gameController;
-	World world;
-	Box2DDebugRenderer debugRenderer;
+	private SpriteBatch batch;
+	private Character character;
+	private CharacterRenderer characterRenderer;
+	private Camera camera;
+	private CharactersTextureAtlas charactersTextureAtlas;
+	private GameController gameController;
+	private World world;
+	private Box2DDebugRenderer debugRenderer;
 
 	public GameWorld() {
 		this(true);
