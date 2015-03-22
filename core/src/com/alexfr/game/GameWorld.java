@@ -31,8 +31,8 @@ public class GameWorld {
 		batch = new SpriteBatch();
 		charactersTextureAtlas = new CharactersTextureAtlas();
 		character = new Character(world);
-		new Platform(world, new Vector2(200, 400), new Vector2(100, 5));
-		new Platform(world, new Vector2(300, 300), new Vector2(100, 5));
+		new Platform(world, new Vector2(100, 400), new Vector2(100, 5));
+		new Platform(world, new Vector2(200, 340), new Vector2(100, 5));
 		characterRenderer = new CharacterRenderer(character, charactersTextureAtlas);
 		gameController = new KeyboardController(character);
 		camera = new Camera();

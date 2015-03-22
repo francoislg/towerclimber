@@ -1,11 +1,12 @@
 package com.alexfr.game.box2dhelper;
 
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Contact;
 
 public class PassThroughPlatformsCollisionHandler implements CollisionEvent {
-	public PassThroughPlatformsCollisionHandler() {
+	private GroundCollisionHandler groundCollision;
 
+	public PassThroughPlatformsCollisionHandler(GroundCollisionHandler groundCollision) {
+		this.groundCollision = groundCollision;
 	}
 
 	@Override
@@ -25,8 +26,7 @@ public class PassThroughPlatformsCollisionHandler implements CollisionEvent {
 
 	@Override
 	public void preSolve(Contact contact) {
-		Vector2 velocity = contact.getFixtureA().getBody().getLinearVelocity();
-		if (velocity.y < 0) {
+		if (!groundCollision.isTouchingThis(contact.getFixtureB())) {
 			contact.setEnabled(false);
 		}
 	}

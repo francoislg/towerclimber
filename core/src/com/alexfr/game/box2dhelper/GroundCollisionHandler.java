@@ -1,30 +1,38 @@
 package com.alexfr.game.box2dhelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.Fixture;
 
 public class GroundCollisionHandler implements CollisionEvent {
-	int numberOfCollision = 0;
+	private List<Fixture> listFixtureTouching;
 
 	public GroundCollisionHandler() {
-
+		listFixtureTouching = new ArrayList<Fixture>();
 	}
 
 	public boolean isTouchingGround() {
-		return numberOfCollision != 0;
+		return listFixtureTouching.size() != 0;
 	}
 
 	public boolean isNotTouchingGround() {
 		return !isTouchingGround();
 	}
 
+	public boolean isTouchingThis(Fixture fixture) {
+		return listFixtureTouching.contains(fixture);
+	}
+
 	@Override
 	public void beginCollision(Contact contact) {
-		numberOfCollision++;
+		listFixtureTouching.add(contact.getFixtureB());
 	}
 
 	@Override
 	public void endCollision(Contact contact) {
-		numberOfCollision--;
+		listFixtureTouching.remove(contact.getFixtureB());
 	}
 
 	@Override
@@ -34,7 +42,6 @@ public class GroundCollisionHandler implements CollisionEvent {
 
 	@Override
 	public void preSolve(Contact contact) {
-		contact.setEnabled(false);
 	}
 
 	@Override

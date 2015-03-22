@@ -33,6 +33,11 @@ public class BodyBuilder {
 		return this;
 	}
 
+	public BodyBuilder withFixedRotation() {
+		bodyDef.fixedRotation = true;
+		return this;
+	}
+
 	public BodyBuilder atPosition(Vector2 position) {
 		this.position = position;
 		return this;

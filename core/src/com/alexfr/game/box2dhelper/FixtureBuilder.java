@@ -8,9 +8,8 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 
 public class FixtureBuilder {
-
-	FixtureDef fixtureDef;
-	PolygonShape shape;
+	private FixtureDef fixtureDef;
+	private PolygonShape shape;
 
 	public FixtureBuilder() {
 		fixtureDef = new FixtureDef();
