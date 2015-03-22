@@ -19,25 +19,27 @@ public class GameWorld {
 	GameController gameController;
 	World world;
 	Box2DDebugRenderer debugRenderer;
-	
+
 	public GameWorld() {
 		this(true);
 	}
-	
+
 	public GameWorld(Boolean debug) {
 		Box2D.init();
-		world = new World(new Vector2(0, 100), true);
+		Vector2 gravity = new Vector2(0, 100);
+		world = new World(gravity, true);
 		batch = new SpriteBatch();
 		charactersTextureAtlas = new CharactersTextureAtlas();
 		character = new Character(world);
-		new Platform(world, new Vector2(200, 400), new Vector2(100,5));
+		new Platform(world, new Vector2(200, 400), new Vector2(100, 5));
+		new Platform(world, new Vector2(300, 300), new Vector2(100, 5));
 		characterRenderer = new CharacterRenderer(character, charactersTextureAtlas);
 		gameController = new KeyboardController(character);
 		camera = new Camera();
 		debugRenderer = new Box2DDebugRenderer();
 	}
-	
-	public void render(){
+
+	public void render() {
 		gameController.update();
 		character.update();
 		camera.update();
@@ -45,7 +47,7 @@ public class GameWorld {
 		batch.begin();
 		characterRenderer.render(batch);
 		batch.end();
-		world.step(1/60f, 6, 2);
+		world.step(1 / 60f, 6, 2);
 		camera.renderDebugBox2D(debugRenderer, world);
 	}
 }
