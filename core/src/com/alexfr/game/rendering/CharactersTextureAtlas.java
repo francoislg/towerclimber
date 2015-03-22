@@ -1,4 +1,4 @@
-package com.alexfr.game;
+package com.alexfr.game.rendering;
 
 import static com.badlogic.gdx.Gdx.files;
 import com.badlogic.gdx.graphics.g2d.Sprite;
