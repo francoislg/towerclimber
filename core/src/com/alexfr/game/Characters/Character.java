@@ -6,6 +6,7 @@ import com.alexfr.game.box2dhelper.FixtureBuilder;
 import com.alexfr.game.box2dhelper.GroundCollisionHandler;
 import com.alexfr.game.box2dhelper.PassThroughPlatformsCollisionHandler;
 import com.alexfr.game.controllers.Controllable;
+import com.alexfr.game.rendering.RenderState;
 import com.alexfr.game.rendering.Renderable;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -77,6 +78,25 @@ public class Character implements Controllable, Renderable {
 	public void update() {
 		if (groundCollision.isNotTouchingGround()) {
 			canJump = true;
+		}
+	}
+
+	@Override
+	public boolean isFacingLeft() {
+		return body.getLinearVelocity().x < 0;
+	}
+
+	@Override
+	public RenderState getCurrentState() {
+		if (groundCollision.isTouchingGround()) {
+			float currentSpeed = Math.abs(body.getLinearVelocity().x);
+			if (currentSpeed > speed.x / 2) {
+				return RenderState.Walking;
+			} else {
+				return RenderState.Idle;
+			}
+		} else {
+			return RenderState.Jumping;
 		}
 	}
 }
