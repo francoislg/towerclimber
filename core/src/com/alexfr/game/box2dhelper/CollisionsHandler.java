@@ -14,14 +14,16 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class CollisionsHandler {
 	private Map<Fixture, List<CollisionEvent>> collisions;
-	
+
 	ContactListener contactListener = new ContactListener() {
 		@Override
 		public void beginContact(Contact contact) {
 			Fixture fixtureA = contact.getFixtureA();
-			if(collisions.containsKey(fixtureA)){
-				for(CollisionEvent collision : collisions.get(fixtureA)){
-					collision.beginCollision(contact);
+			if (collisions.containsKey(fixtureA)) {
+				for (CollisionEvent collision : collisions.get(fixtureA)) {
+					if (collision.contactIsValid(contact)) {
+						collision.beginCollision(contact);
+					}
 				}
 			}
 		}
@@ -29,33 +31,53 @@ public class CollisionsHandler {
 		@Override
 		public void endContact(Contact contact) {
 			Fixture fixtureA = contact.getFixtureA();
-			if(collisions.containsKey(fixtureA)){
-				for(CollisionEvent collision : collisions.get(fixtureA)){
-					collision.endCollision(contact);
+			if (collisions.containsKey(fixtureA)) {
+				for (CollisionEvent collision : collisions.get(fixtureA)) {
+					if (collision.contactIsValid(contact)) {
+						collision.endCollision(contact);
+					}
 				}
 			}
 		}
 
 		@Override
-		public void preSolve(Contact contact, Manifold oldManifold) {}
+		public void preSolve(Contact contact, Manifold oldManifold) {
+			Fixture fixtureA = contact.getFixtureA();
+			if (collisions.containsKey(fixtureA)) {
+				for (CollisionEvent collision : collisions.get(fixtureA)) {
+					if (collision.contactIsValid(contact)) {
+						collision.preSolve(contact);
+					}
+				}
+			}
+		}
 
 		@Override
-		public void postSolve(Contact contact, ContactImpulse impulse) {}
-    };
-	
-	public CollisionsHandler(World world){
+		public void postSolve(Contact contact, ContactImpulse impulse) {
+			Fixture fixtureA = contact.getFixtureA();
+			if (collisions.containsKey(fixtureA)) {
+				for (CollisionEvent collision : collisions.get(fixtureA)) {
+					if (collision.contactIsValid(contact)) {
+						collision.postSolve(contact);
+					}
+				}
+			}
+		}
+	};
+
+	public CollisionsHandler(World world) {
 		collisions = new HashMap<Fixture, List<CollisionEvent>>();
 		world.setContactListener(contactListener);
 	}
-	
-	public void addCollision(CollisionEvent collision, Fixture fixture){
-		if(!collisions.containsKey(fixture)){
+
+	public void addCollision(CollisionEvent collision, Fixture fixture) {
+		if (!collisions.containsKey(fixture)) {
 			collisions.put(fixture, new ArrayList<CollisionEvent>());
 		}
 		collisions.get(fixture).add(collision);
 	}
-	
-	public void setCollisionsInWorld(World world){
+
+	public void setCollisionsInWorld(World world) {
 		world.setContactListener(contactListener);
 	}
 }

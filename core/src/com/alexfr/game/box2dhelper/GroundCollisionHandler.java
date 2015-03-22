@@ -4,34 +4,40 @@ import com.badlogic.gdx.physics.box2d.Contact;
 
 public class GroundCollisionHandler implements CollisionEvent {
 	int numberOfCollision = 0;
-	
+
 	public GroundCollisionHandler() {
-		
+
 	}
-	
-	public boolean isTouchingGround(){
+
+	public boolean isTouchingGround() {
 		return numberOfCollision != 0;
 	}
-	
+
 	public boolean isNotTouchingGround() {
 		return !isTouchingGround();
 	}
 
 	@Override
 	public void beginCollision(Contact contact) {
-		if(contactIsValid(contact)){
-			numberOfCollision++;
-		}
+		numberOfCollision++;
 	}
 
 	@Override
 	public void endCollision(Contact contact) {
-		if(contactIsValid(contact)){
-			numberOfCollision--;
-		}
+		numberOfCollision--;
 	}
-	
-	private boolean contactIsValid(Contact contact){
+
+	@Override
+	public boolean contactIsValid(Contact contact) {
 		return true;
+	}
+
+	@Override
+	public void preSolve(Contact contact) {
+		contact.setEnabled(false);
+	}
+
+	@Override
+	public void postSolve(Contact contact) {
 	}
 }
