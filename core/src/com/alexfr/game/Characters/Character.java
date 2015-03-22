@@ -1,6 +1,7 @@
 package com.alexfr.game.characters;
 
 import com.alexfr.game.box2dhelper.BodyBuilder;
+import com.alexfr.game.box2dhelper.CollisionsHandler;
 import com.alexfr.game.box2dhelper.FixtureBuilder;
 import com.alexfr.game.box2dhelper.GroundCollisionHandler;
 import com.alexfr.game.controllers.Controllable;
@@ -25,13 +26,16 @@ public class Character implements Controllable, Renderable {
 	private Fixture bodyFixture;
 	private Fixture feets;
 	private GroundCollisionHandler groundCollision;
+	private CollisionsHandler collisions;
+	private boolean canJump = false;
 	
 	public Character(World world) {
         body = new BodyBuilder().thatIsDynamic().buildIn(world);
         bodyFixture = new FixtureBuilder().withABoxShape(boxSize).withDensity(1f).buildIn(body);        
         feets = new FixtureBuilder().thatIsASensor().withABoxShape(new Vector2(boxSize.x, 1), new Vector2(0, boxSize.y), 0).buildIn(body);
-        groundCollision = new GroundCollisionHandler(feets);
-        groundCollision.setCollisionInWorld(world);
+        collisions = new CollisionsHandler(world);
+        groundCollision = new GroundCollisionHandler();
+        collisions.addCollision(groundCollision, feets);
 	}
 	
 	@Override
@@ -51,10 +55,11 @@ public class Character implements Controllable, Renderable {
 
 	@Override
 	public void jump(){
-		if(groundCollision.isTouchingGround()){
+		if(groundCollision.isTouchingGround() && canJump){
 			Gdx.app.log("tryJumping", "trying");
 			float impulse = body.getMass() * jumpForce;
 			body.applyLinearImpulse(new Vector2(0, -impulse), body.getWorldCenter(), true);
+			canJump = false;
 		}
 	}
 	
@@ -72,6 +77,8 @@ public class Character implements Controllable, Renderable {
 
 	@Override
 	public void update() {
-		
+		if(groundCollision.isNotTouchingGround()){
+			canJump = true;
+		}
 	}
 }
