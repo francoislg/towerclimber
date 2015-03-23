@@ -37,12 +37,14 @@ public class GameWorld {
 		characterRenderer = new CharacterRenderer(character, charactersTextureAtlas);
 		gameController = new KeyboardController(character);
 		camera = new Camera();
+		camera.setPosition(new Vector2(character.getPosition().x, 0));
 		debugRenderer = new Box2DDebugRenderer();
 	}
 
 	public void render() {
 		gameController.update();
 		character.update();
+		camera.follow(character);
 		camera.update();
 		camera.setSpriteBatchProjection(batch);
 		batch.begin();
