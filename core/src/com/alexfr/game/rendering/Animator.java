@@ -46,8 +46,7 @@ public class Animator {
 		TextureRegion region = animations.get(currentState).getKeyFrame(elapsedTime, true);
 		if (isFlipped && !region.isFlipX()) {
 			region.flip(true, false);
-		}
-		if (!isFlipped && region.isFlipX()) {
+		} else if (!isFlipped && region.isFlipX()) {
 			region.flip(true, false);
 		}
 		return region;
