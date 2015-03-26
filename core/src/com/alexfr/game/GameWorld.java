@@ -1,5 +1,6 @@
 package com.alexfr.game;
 
+import com.alexfr.game.box2dhelper.Conversion;
 import com.alexfr.game.characters.Character;
 import com.alexfr.game.controllers.GameController;
 import com.alexfr.game.controllers.KeyboardController;
@@ -31,9 +32,9 @@ public class GameWorld {
 		world = new World(gravity, true);
 		batch = new SpriteBatch();
 		charactersTextureAtlas = new CharactersTextureAtlas();
-		character = new Character(world);
-		new Platform(world, new Vector2(100, 400), new Vector2(100, 5));
-		new Platform(world, new Vector2(200, 340), new Vector2(100, 5));
+		character = new Character(world, Conversion.metersToPixels(new Vector2(50, 50)));
+		new Platform(world, Conversion.metersToPixels(new Vector2(100, 400)), Conversion.metersToPixels(new Vector2(100, 5)));
+		new Platform(world, Conversion.metersToPixels(new Vector2(200, 340)), Conversion.metersToPixels(new Vector2(100, 5)));
 		characterRenderer = new CharacterRenderer(character, charactersTextureAtlas);
 		gameController = new KeyboardController(character);
 		camera = new Camera();

@@ -2,7 +2,6 @@ package com.alexfr.game.characters;
 
 import com.alexfr.game.box2dhelper.BodyBuilder;
 import com.alexfr.game.box2dhelper.CollisionsHandler;
-import com.alexfr.game.box2dhelper.Conversion;
 import com.alexfr.game.box2dhelper.FixtureBuilder;
 import com.alexfr.game.box2dhelper.GroundCollisionHandler;
 import com.alexfr.game.box2dhelper.PassThroughPlatformsCollisionHandler;
@@ -16,8 +15,8 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class Character implements Controllable, Renderable {
 
-	private final Vector2 size = Conversion.metersToPixels(new Vector2(50, 50));
-	private final Vector2 boxSize = new Vector2(size.x / 2, size.y / 2);
+	private final Vector2 size;
+	private final Vector2 boxSize;
 	private final Vector2 speed = new Vector2(1, 5);
 	private final float jumpForce = 200;
 	private Body body;
@@ -28,7 +27,9 @@ public class Character implements Controllable, Renderable {
 	private CollisionsHandler collisions;
 	private boolean canJump = false;
 
-	public Character(World world) {
+	public Character(World world, Vector2 size) {
+		this.size = size;
+		this.boxSize = new Vector2(size.x / 2, size.y / 2);
 		body = new BodyBuilder().thatIsDynamic().withFixedRotation().buildIn(world);
 		bodyFixture = new FixtureBuilder().withABoxShape(boxSize).withDensity(1f).buildIn(body);
 		feets = new FixtureBuilder().thatIsASensor().withABoxShape(new Vector2(boxSize.x, 1), new Vector2(0, boxSize.y + 1), 0).buildIn(body);
