@@ -41,7 +41,7 @@ public class Camera {
 	}
 
 	public void follow(Character character) {
-		float lerp = 0.1f;
+		float lerp = 0.03f;
 		Vector2 position = character.getPosition();
 		Vector3 camPosition = camera.position;
 		camPosition.y += (position.y - camPosition.y) * lerp;

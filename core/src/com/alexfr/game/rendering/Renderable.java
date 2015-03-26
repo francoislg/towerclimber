@@ -7,7 +7,7 @@ public interface Renderable {
 
 	public float getRotation();
 
-	public Vector2 getSize();
+	public Vector2 getSizeInPixels();
 
 	public RenderState getCurrentState();
 

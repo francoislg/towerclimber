@@ -39,7 +39,7 @@ public class BodyBuilder {
 	}
 
 	public BodyBuilder atPosition(Vector2 position) {
-		this.position = position;
+		this.position = Conversion.metersToPixels(position);
 		return this;
 	}
 

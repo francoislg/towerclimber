@@ -22,13 +22,16 @@ public class FixtureBuilder {
 	}
 
 	public FixtureBuilder withABoxShape(Vector2 size) {
-		shape.setAsBox(size.x, size.y);
+		Vector2 sizeInPixels = Conversion.metersToPixels(size);
+		shape.setAsBox(sizeInPixels.x, sizeInPixels.y);
 		fixtureDef.shape = shape;
 		return this;
 	}
 
 	public FixtureBuilder withABoxShape(Vector2 size, Vector2 offset, float angle) {
-		shape.setAsBox(size.x, size.y, offset, angle);
+		Vector2 sizeInPixels = Conversion.metersToPixels(size);
+		Vector2 offsetInPixels = Conversion.metersToPixels(offset);
+		shape.setAsBox(sizeInPixels.x, sizeInPixels.y, offsetInPixels, angle);
 		fixtureDef.shape = shape;
 		return this;
 	}

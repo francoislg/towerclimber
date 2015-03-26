@@ -37,7 +37,7 @@ public class GameWorld {
 		world = new World(gravity, true);
 		batch = new SpriteBatch();
 		charactersTextureAtlas = new CharactersTextureAtlas();
-		character = new Character(world, Conversion.metersToPixels(new Vector2(50, 50)));
+		character = new Character(world, new Vector2(25, 25));
 		characterRenderer = new CharacterRenderer(character, charactersTextureAtlas);
 		gameController = new KeyboardController(character);
 		platformHandler = new PlatformHandler(world, seed);
@@ -49,8 +49,9 @@ public class GameWorld {
 	public void render() {
 		gameController.update();
 		character.update();
-		float topBound = character.getPosition().y - 500;
-		float bottomBound = character.getPosition().y + 500;
+		float positionYMeters = character.getPosition().y;
+		float topBound = positionYMeters - 500;
+		float bottomBound = positionYMeters + 500;
 		platformHandler.update(topBound, bottomBound);
 		camera.follow(character);
 		camera.update();

@@ -3,8 +3,9 @@ package com.alexfr.game.box2dhelper;
 import com.badlogic.gdx.math.Vector2;
 
 public class Conversion {
-	private static float metersToPixels = 0.3f;
-	private static float pixelsToMeters = 1 / metersToPixels;
+	private static float metersPerPixels = 3f;
+	private static float metersToPixels = 1 / metersPerPixels;
+	private static float pixelsToMeters = metersPerPixels;
 
 	public static float metersToPixels(float meters) {
 		return meters * metersToPixels;

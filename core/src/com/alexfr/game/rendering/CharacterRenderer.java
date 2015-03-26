@@ -6,18 +6,22 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 public class CharacterRenderer implements Renderer {
-	private Renderable character;
-	private Vector2 size;
-	private Vector2 center;
-	private Animator animator;
+	private final Renderable character;
+	private final Vector2 size;
+	private final Vector2 center;
+	private final Vector2 imageSize;
+	private final Vector2 ratio;
+	private final Animator animator;
 
 	public CharacterRenderer(Renderable character, CharactersTextureAtlas charactersTextureAtlas) {
 		this.character = character;
-		size = character.getSize();
+		size = character.getSizeInPixels();
 		center = new Vector2(size.x / 2, size.y / 2);
 
 		Sprite sprite = charactersTextureAtlas.createSprite("droid");
-		animator = new Animator(sprite, 56, 80);
+		imageSize = new Vector2(56, 80);
+		ratio = new Vector2(size.x / imageSize.x, size.y / imageSize.y);
+		animator = new Animator(sprite, (int)imageSize.x, (int)imageSize.y);
 		animator.createNewAnimation(RenderState.Idle, 0, 3);
 		animator.createNewAnimation(RenderState.Walking, 1, 3);
 		animator.createNewAnimation(RenderState.Jumping, 2, 3);
@@ -28,6 +32,6 @@ public class CharacterRenderer implements Renderer {
 		Vector2 position = character.getPosition();
 		animator.update(character);
 		TextureRegion currentFrame = animator.getCurrentKeyFrame();
-		batch.draw(currentFrame, position.x - center.x, position.y - center.y, center.x, center.y, size.x, size.y, 1, 1, character.getRotation());
+		batch.draw(currentFrame, position.x - center.x, position.y - center.y, 0, 0, imageSize.x, imageSize.y, ratio.x, ratio.y, character.getRotation());
 	}
 }
