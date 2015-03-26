@@ -1,5 +1,7 @@
 package com.alexfr.game;
 
+import java.util.Random;
+
 import com.alexfr.game.box2dhelper.Conversion;
 import com.alexfr.game.characters.Character;
 import com.alexfr.game.controllers.GameController;
@@ -21,6 +23,8 @@ public class GameWorld {
 	private GameController gameController;
 	private World world;
 	private Box2DDebugRenderer debugRenderer;
+	private Random seed;
+	private PlatformHandler platformHandler;
 
 	public GameWorld() {
 		this(true);
@@ -28,15 +32,15 @@ public class GameWorld {
 
 	public GameWorld(Boolean debug) {
 		Box2D.init();
+		seed = new Random();
 		Vector2 gravity = new Vector2(0, 100);
 		world = new World(gravity, true);
 		batch = new SpriteBatch();
 		charactersTextureAtlas = new CharactersTextureAtlas();
 		character = new Character(world, Conversion.metersToPixels(new Vector2(50, 50)));
-		new Platform(world, Conversion.metersToPixels(new Vector2(100, 400)), Conversion.metersToPixels(new Vector2(100, 5)));
-		new Platform(world, Conversion.metersToPixels(new Vector2(200, 340)), Conversion.metersToPixels(new Vector2(100, 5)));
 		characterRenderer = new CharacterRenderer(character, charactersTextureAtlas);
 		gameController = new KeyboardController(character);
+		platformHandler = new PlatformHandler(world, seed);
 		camera = new Camera();
 		camera.setPosition(new Vector2(character.getPosition().x, 0));
 		debugRenderer = new Box2DDebugRenderer();
@@ -45,6 +49,9 @@ public class GameWorld {
 	public void render() {
 		gameController.update();
 		character.update();
+		float topBound = character.getPosition().y - 500;
+		float bottomBound = character.getPosition().y + 500;
+		platformHandler.update(topBound, bottomBound);
 		camera.follow(character);
 		camera.update();
 		camera.setSpriteBatchProjection(batch);
