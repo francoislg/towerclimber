@@ -8,52 +8,53 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 
 public class FixtureBuilder {
-	private FixtureDef fixtureDef;
-	private PolygonShape shape;
+    private FixtureDef fixtureDef;
+    private PolygonShape shape;
 
-	public FixtureBuilder() {
-		fixtureDef = new FixtureDef();
-		shape = new PolygonShape();
-	}
+    public FixtureBuilder() {
+	fixtureDef = new FixtureDef();
+	shape = new PolygonShape();
+    }
 
-	public FixtureBuilder thatIsASensor() {
-		fixtureDef.isSensor = true;
-		return this;
-	}
+    public FixtureBuilder thatIsASensor() {
+	fixtureDef.isSensor = true;
+	return this;
+    }
 
-	public FixtureBuilder withABoxShape(Vector2 size) {
-		Vector2 sizeInPixels = Conversion.metersToPixels(size);
-		shape.setAsBox(sizeInPixels.x, sizeInPixels.y);
-		fixtureDef.shape = shape;
-		return this;
-	}
+    public FixtureBuilder withABoxShape(Vector2 size) {
+	Vector2 sizeInPixels = Conversion.metersToPixels(size);
+	shape.setAsBox(sizeInPixels.x, sizeInPixels.y);
+	fixtureDef.shape = shape;
+	return this;
+    }
 
-	public FixtureBuilder withABoxShape(Vector2 size, Vector2 offset, float angle) {
-		Vector2 sizeInPixels = Conversion.metersToPixels(size);
-		Vector2 offsetInPixels = Conversion.metersToPixels(offset);
-		shape.setAsBox(sizeInPixels.x, sizeInPixels.y, offsetInPixels, angle);
-		fixtureDef.shape = shape;
-		return this;
-	}
+    public FixtureBuilder withABoxShape(Vector2 size, Vector2 offset,
+	    float angle) {
+	Vector2 sizeInPixels = Conversion.metersToPixels(size);
+	Vector2 offsetInPixels = Conversion.metersToPixels(offset);
+	shape.setAsBox(sizeInPixels.x, sizeInPixels.y, offsetInPixels, angle);
+	fixtureDef.shape = shape;
+	return this;
+    }
 
-	public FixtureBuilder withShape(Shape shape) {
-		fixtureDef.shape = shape;
-		return this;
-	}
+    public FixtureBuilder withShape(Shape shape) {
+	fixtureDef.shape = shape;
+	return this;
+    }
 
-	public FixtureBuilder withDensity(float density) {
-		fixtureDef.density = density;
-		return this;
-	}
+    public FixtureBuilder withDensity(float density) {
+	fixtureDef.density = density;
+	return this;
+    }
 
-	public FixtureBuilder withFriction(float friction) {
-		fixtureDef.friction = friction;
-		return this;
-	}
+    public FixtureBuilder withFriction(float friction) {
+	fixtureDef.friction = friction;
+	return this;
+    }
 
-	public Fixture buildIn(Body body) {
-		Fixture fixture = body.createFixture(fixtureDef);
-		shape.dispose();
-		return fixture;
-	}
+    public Fixture buildIn(Body body) {
+	Fixture fixture = body.createFixture(fixtureDef);
+	shape.dispose();
+	return fixture;
+    }
 }

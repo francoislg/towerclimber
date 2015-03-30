@@ -7,44 +7,44 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.Fixture;
 
 public class GroundCollisionHandler implements CollisionEvent {
-	private List<Fixture> listFixtureTouching;
+    private List<Fixture> listFixtureTouching;
 
-	public GroundCollisionHandler() {
-		listFixtureTouching = new ArrayList<Fixture>();
-	}
+    public GroundCollisionHandler() {
+	listFixtureTouching = new ArrayList<Fixture>();
+    }
 
-	public boolean isTouchingGround() {
-		return listFixtureTouching.size() != 0;
-	}
+    public boolean isTouchingGround() {
+	return listFixtureTouching.size() != 0;
+    }
 
-	public boolean isNotTouchingGround() {
-		return !isTouchingGround();
-	}
+    public boolean isNotTouchingGround() {
+	return !isTouchingGround();
+    }
 
-	public boolean isTouchingThis(Fixture fixture) {
-		return listFixtureTouching.contains(fixture);
-	}
+    public boolean isTouchingThis(Fixture fixture) {
+	return listFixtureTouching.contains(fixture);
+    }
 
-	@Override
-	public void beginCollision(Contact contact) {
-		listFixtureTouching.add(contact.getFixtureB());
-	}
+    @Override
+    public void beginCollision(Contact contact) {
+	listFixtureTouching.add(contact.getFixtureB());
+    }
 
-	@Override
-	public void endCollision(Contact contact) {
-		listFixtureTouching.remove(contact.getFixtureB());
-	}
+    @Override
+    public void endCollision(Contact contact) {
+	listFixtureTouching.remove(contact.getFixtureB());
+    }
 
-	@Override
-	public boolean contactIsValid(Contact contact) {
-		return true;
-	}
+    @Override
+    public boolean contactIsValid(Contact contact) {
+	return true;
+    }
 
-	@Override
-	public void preSolve(Contact contact) {
-	}
+    @Override
+    public void preSolve(Contact contact) {
+    }
 
-	@Override
-	public void postSolve(Contact contact) {
-	}
+    @Override
+    public void postSolve(Contact contact) {
+    }
 }

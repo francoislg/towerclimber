@@ -6,17 +6,17 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 public class CharactersTextureAtlas {
-	private TextureAtlas textureAtlas;
+    private TextureAtlas textureAtlas;
 
-	public CharactersTextureAtlas() {
-		textureAtlas = new TextureAtlas(files.internal("characters.pack"), true);
-	}
+    public CharactersTextureAtlas() {
+	textureAtlas = new TextureAtlas(files.internal("characters.pack"), true);
+    }
 
-	public Sprite createSprite(String name) {
-		return textureAtlas.createSprite(name);
-	}
+    public Sprite createSprite(String name) {
+	return textureAtlas.createSprite(name);
+    }
 
-	public void dispose() {
-		textureAtlas.dispose();
-	}
+    public void dispose() {
+	textureAtlas.dispose();
+    }
 }

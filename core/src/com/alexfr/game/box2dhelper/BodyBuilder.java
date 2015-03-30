@@ -7,50 +7,50 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class BodyBuilder {
-	private BodyDef bodyDef;
-	private Vector2 position;
-	private float angle;
+    private BodyDef bodyDef;
+    private Vector2 position;
+    private float angle;
 
-	public BodyBuilder() {
-		bodyDef = new BodyDef();
-		bodyDef.type = BodyType.StaticBody;
-		position = new Vector2(0, 0);
-		angle = 0;
-	}
+    public BodyBuilder() {
+	bodyDef = new BodyDef();
+	bodyDef.type = BodyType.StaticBody;
+	position = new Vector2(0, 0);
+	angle = 0;
+    }
 
-	public BodyBuilder thatIsDynamic() {
-		bodyDef.type = BodyType.DynamicBody;
-		return this;
-	}
+    public BodyBuilder thatIsDynamic() {
+	bodyDef.type = BodyType.DynamicBody;
+	return this;
+    }
 
-	public BodyBuilder thatIsStatic() {
-		bodyDef.type = BodyType.StaticBody;
-		return this;
-	}
+    public BodyBuilder thatIsStatic() {
+	bodyDef.type = BodyType.StaticBody;
+	return this;
+    }
 
-	public BodyBuilder thatIsKinematic() {
-		bodyDef.type = BodyType.KinematicBody;
-		return this;
-	}
+    public BodyBuilder thatIsKinematic() {
+	bodyDef.type = BodyType.KinematicBody;
+	return this;
+    }
 
-	public BodyBuilder withFixedRotation() {
-		bodyDef.fixedRotation = true;
-		return this;
-	}
+    public BodyBuilder withFixedRotation() {
+	bodyDef.fixedRotation = true;
+	return this;
+    }
 
-	public BodyBuilder atPosition(Vector2 position) {
-		this.position = Conversion.metersToPixels(position);
-		return this;
-	}
+    public BodyBuilder atPosition(Vector2 position) {
+	this.position = Conversion.metersToPixels(position);
+	return this;
+    }
 
-	public BodyBuilder atAngle(float angle) {
-		this.angle = angle;
-		return this;
-	}
+    public BodyBuilder atAngle(float angle) {
+	this.angle = angle;
+	return this;
+    }
 
-	public Body buildIn(World world) {
-		Body body = world.createBody(bodyDef);
-		body.setTransform(position, angle);
-		return body;
-	}
+    public Body buildIn(World world) {
+	Body body = world.createBody(bodyDef);
+	body.setTransform(position, angle);
+	return body;
+    }
 }

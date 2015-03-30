@@ -4,25 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PressableKeysHandler {
-	private List<Integer> keycodes;
-	
-	public PressableKeysHandler(){
-		this.keycodes = new ArrayList<Integer>();
-	}
+    private List<Integer> keycodes;
 
-	public void updateKeyDown(Integer keycode){
-		if(!keycodes.contains(keycode)){
-			keycodes.add(keycode);
-		}
-	}
+    public PressableKeysHandler() {
+	this.keycodes = new ArrayList<Integer>();
+    }
 
-	public void updateKeyUp(Integer keycode){
-		if(keycodes.contains(keycode)){
-			keycodes.remove(keycode);
-		}
+    public void updateKeyDown(Integer keycode) {
+	if (!keycodes.contains(keycode)) {
+	    keycodes.add(keycode);
 	}
+    }
 
-	public boolean isPressed(Integer keycode){
-		return keycodes.contains(keycode);
+    public void updateKeyUp(Integer keycode) {
+	if (keycodes.contains(keycode)) {
+	    keycodes.remove(keycode);
 	}
+    }
+
+    public boolean isPressed(Integer keycode) {
+	return keycodes.contains(keycode);
+    }
 }
