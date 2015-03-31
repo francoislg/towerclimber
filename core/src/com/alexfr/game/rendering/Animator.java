@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Animator {
@@ -15,8 +15,8 @@ public class Animator {
     private boolean isFlipped = false;
     private float elapsedTime;
 
-    public Animator(Sprite sprite, int width, int height) {
-	regions = TextureRegion.split(sprite.getTexture(), width, height);
+    public Animator(AtlasRegion atlasRegion, int width, int height) {
+	regions = atlasRegion.split(width, height);
 	for (TextureRegion[] regionsX : regions) {
 	    for (TextureRegion region : regionsX) {
 		region.flip(false, true);

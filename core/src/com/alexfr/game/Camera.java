@@ -46,4 +46,9 @@ public class Camera {
 	Vector3 camPosition = camera.position;
 	camPosition.y += (position.y - camPosition.y) * lerp;
     }
+
+    public Vector3 screenToWorld(float screenX, float screenY) {
+	Vector3 worldCoordinates = new Vector3(screenX, screenY, 0);
+	return camera.unproject(worldCoordinates);
+    }
 }

@@ -16,24 +16,28 @@ public class PlatformHandler {
     private final float distanceBetweenPlatforms = 50;
 
     private World world;
-    private Random random;
+    private WorldBounds worldBounds;
+    private Random randomizer;
     private List<Platform> platforms;
     private float topMostPlatformY = offsetForNewPlatform;
     private float bottomMostPlatformY = 0;
 
-    public PlatformHandler(World world) {
-	this(world, new Random());
+    public PlatformHandler(World world, WorldBounds worldBounds) {
+	this(world, worldBounds, new Random());
     }
 
-    public PlatformHandler(World world, Random random) {
+    public PlatformHandler(World world, WorldBounds worldBounds,
+	    Random randomizer) {
 	this.world = world;
-	this.random = random;
+	this.worldBounds = worldBounds;
+	this.randomizer = randomizer;
 	this.platforms = new ArrayList<Platform>();
 	generatePlaform();
     }
 
     public void generatePlaform() {
-	Vector2 position = new Vector2(random.nextInt(200) - 100,
+	Vector2 position = new Vector2(
+		worldBounds.getRandomNumberInBounds(randomizer),
 		Conversion.pixelsToMeters(topMostPlatformY)
 			- distanceBetweenPlatforms);
 	Vector2 size = new Vector2(100, 3);
@@ -43,7 +47,7 @@ public class PlatformHandler {
 	    bottomMostPlatformY = topMostPlatformY;
 	}
 	platforms.add(platform);
-	Gdx.app.log("platforms", "NEW ONE : " + topMostPlatformY);
+	Gdx.app.log("Nouvelle plateforme", position.x + "/" + position.y);
     }
 
     public void update(float topBound, float bottomBound) {

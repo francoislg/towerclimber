@@ -1,13 +1,15 @@
 package com.alexfr.game.characters;
 
+import com.alexfr.game.WorldBounds;
 import com.alexfr.game.box2dhelper.BodyBuilder;
 import com.alexfr.game.box2dhelper.CollisionsHandler;
 import com.alexfr.game.box2dhelper.FixtureBuilder;
 import com.alexfr.game.box2dhelper.GroundCollisionHandler;
 import com.alexfr.game.box2dhelper.PassThroughPlatformsCollisionHandler;
 import com.alexfr.game.controllers.Controllable;
-import com.alexfr.game.rendering.RenderState;
 import com.alexfr.game.rendering.Animable;
+import com.alexfr.game.rendering.RenderState;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
@@ -25,11 +27,16 @@ public class Character implements Controllable, Animable {
     private PassThroughPlatformsCollisionHandler passThroughPlaformsCollision;
     private CollisionsHandler collisions;
     private boolean canJump = false;
+    private WorldBounds bounds;
 
-    public Character(World world, Vector2 size) {
+    public Character(World world, Vector2 position, Vector2 size,
+	    WorldBounds bounds) {
 	this.size = size;
-	this.body = new BodyBuilder().thatIsDynamic().withFixedRotation()
-		.buildIn(world);
+	this.bounds = bounds;
+	this.body = new BodyBuilder().thatIsDynamic().atPosition(position)
+		.withFixedRotation().buildIn(world);
+	Gdx.app.log("Character position", position.x + "/" + position.y
+		+ " -- " + body.getPosition().x + "/" + body.getPosition().y);
 	this.bodyFixture = new FixtureBuilder().withABoxShape(size)
 		.withDensity(1f).buildIn(body);
 	this.feets = new FixtureBuilder()
@@ -86,6 +93,14 @@ public class Character implements Controllable, Animable {
 	if (groundCollision.isNotTouchingGround() && isFallingDown()) {
 	    canJump = true;
 	}
+	if (bounds.isOutsideBounds(body.getPosition().x, size.x)) {
+	    Vector2 currentVelocity = body.getLinearVelocity();
+	    body.setLinearVelocity(-currentVelocity.x, currentVelocity.y);
+	}
+	/*
+	 * Gdx.app.log("Character position", body.getPosition().x + "/" +
+	 * body.getPosition().y);
+	 */
     }
 
     private boolean isFallingDown() {
