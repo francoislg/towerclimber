@@ -2,7 +2,7 @@ package com.alexfr.game.rendering;
 
 import com.badlogic.gdx.math.Vector2;
 
-public interface Renderable {
+public interface Animable {
     public Vector2 getPosition();
 
     public float getRotation();

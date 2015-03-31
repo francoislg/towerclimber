@@ -34,7 +34,7 @@ public class Animator {
 	animations.put(state, new Animation(1 / 15f, frames));
     }
 
-    public void update(Renderable renderable) {
+    public void update(Animable renderable) {
 	elapsedTime += Gdx.graphics.getDeltaTime();
 	isFlipped = renderable.isFacingLeft();
 	RenderState state = renderable.getCurrentState();

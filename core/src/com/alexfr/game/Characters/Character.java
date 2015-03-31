@@ -7,13 +7,13 @@ import com.alexfr.game.box2dhelper.GroundCollisionHandler;
 import com.alexfr.game.box2dhelper.PassThroughPlatformsCollisionHandler;
 import com.alexfr.game.controllers.Controllable;
 import com.alexfr.game.rendering.RenderState;
-import com.alexfr.game.rendering.Renderable;
+import com.alexfr.game.rendering.Animable;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 
-public class Character implements Controllable, Renderable {
+public class Character implements Controllable, Animable {
 
     private final Vector2 size;
     private final Vector2 speed = new Vector2(1, 5);

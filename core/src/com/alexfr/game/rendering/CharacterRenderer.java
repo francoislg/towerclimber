@@ -7,14 +7,14 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 public class CharacterRenderer implements Renderer {
-    private final Renderable character;
+    private final Animable character;
     private final Vector2 size;
     private final Vector2 center;
     private final Vector2 imageSize;
     private final Vector2 ratio;
     private final Animator animator;
 
-    public CharacterRenderer(Renderable character,
+    public CharacterRenderer(Animable character,
 	    CharactersTextureAtlas charactersTextureAtlas) {
 	this.character = character;
 	size = character.getSizeInPixels();
