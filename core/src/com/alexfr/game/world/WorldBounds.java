@@ -13,8 +13,12 @@ public class WorldBounds {
 	this.randomizer = new Random();
     }
 
-    public boolean isOutsideBounds(float positionX, float sizeX) {
-	return positionX < leftBound || positionX + sizeX > rightBound;
+    public boolean isOutsideLeftBounds(float positionX) {
+	return positionX < leftBound;
+    }
+
+    public boolean isOutsideRightBounds(float positionX) {
+	return positionX > rightBound;
     }
 
     public float getRandomNumberInBounds() {

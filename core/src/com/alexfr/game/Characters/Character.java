@@ -14,6 +14,7 @@ import com.alexfr.game.rendering.Animable;
 import com.alexfr.game.rendering.RenderState;
 import com.alexfr.game.world.GameWorld;
 import com.alexfr.game.world.WorldBounds;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
@@ -67,7 +68,9 @@ public class Character implements Controllable, Animable, Targetable, Collidable
     public void jump() {
 	if (groundCollision.isTouchingGround() && canJump) {
 	    float impulse = body.getMass() * jumpForce;
+	    Gdx.app.log("JUMP", "Before" + body.getLinearVelocity().y);
 	    body.applyLinearImpulse(new Vector2(0, -impulse), body.getWorldCenter(), true);
+	    Gdx.app.log("JUMP", "After" + body.getLinearVelocity().y);
 	    canJump = false;
 	}
     }
@@ -89,8 +92,10 @@ public class Character implements Controllable, Animable, Targetable, Collidable
 	if (groundCollision.isNotTouchingGround() && isFallingDown()) {
 	    canJump = true;
 	}
-	if (bounds.isOutsideBounds(body.getPosition().x, size.x)) {
-	    Vector2 currentVelocity = body.getLinearVelocity();
+	Vector2 currentVelocity = body.getLinearVelocity();
+	float positionX = body.getPosition().x;
+	if (bounds.isOutsideLeftBounds(positionX) && currentVelocity.x < 0
+		|| bounds.isOutsideRightBounds(positionX + size.x) && currentVelocity.x > 0) {
 	    body.setLinearVelocity(-(currentVelocity.x / 2), currentVelocity.y);
 	}
     }

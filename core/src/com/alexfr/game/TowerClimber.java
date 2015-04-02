@@ -2,13 +2,13 @@ package com.alexfr.game;
 
 import com.alexfr.game.camera.Camera;
 import com.alexfr.game.characters.Character;
-import com.alexfr.game.constants.Conversion;
 import com.alexfr.game.controllers.ControllersHandler;
 import com.alexfr.game.controllers.DebugClick;
 import com.alexfr.game.controllers.GameController;
 import com.alexfr.game.controllers.KeyboardController;
 import com.alexfr.game.rendering.CharacterRenderer;
 import com.alexfr.game.rendering.CharactersTextureAtlas;
+import com.alexfr.game.rendering.GameWorldRenderer;
 import com.alexfr.game.world.GameWorld;
 import com.alexfr.game.world.PlatformHandler;
 import com.badlogic.gdx.ApplicationAdapter;
@@ -27,14 +27,17 @@ public class TowerClimber extends ApplicationAdapter {
     private Character character;
     private CharactersTextureAtlas charactersTextureAtlas;
     private CharacterRenderer characterRenderer;
+    private GameWorldRenderer gameWorldRenderer;
     private PlatformHandler platformHandler;
 
     @Override
     public void create() {
 	gameWorld = new GameWorld();
+	gameWorldRenderer = new GameWorldRenderer(gameWorld);
 	charactersTextureAtlas = new CharactersTextureAtlas();
 	character = new Character(gameWorld, new Vector2(16, 16));
 	characterRenderer = new CharacterRenderer(character, charactersTextureAtlas);
+	gameWorld.addCharacter(character);
 	camera = new Camera();
 	camera.setPosition(new Vector2(gameWorld.getBounds().getMiddle(), 0));
 	camera.changeTarget(character);
@@ -57,15 +60,13 @@ public class TowerClimber extends ApplicationAdapter {
 	Gdx.gl.glClearColor(0, 0, 0, 1);
 	Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	controllers.update();
-	character.update();
 	gameWorld.update();
-	float positionYWorld = character.getPosition().y;
-	float topBound = positionYWorld - Conversion.pixelsToWorld(500);
-	float bottomBound = positionYWorld + Conversion.pixelsToWorld(500);
-	platformHandler.update(topBound, bottomBound);
+	character.update();
+	platformHandler.update();
 	camera.update();
 	camera.setSpriteBatchProjection(batch);
 	batch.begin();
+	gameWorldRenderer.render(batch);
 	characterRenderer.render(batch);
 	batch.end();
 	gameWorld.renderBox2DDebug(camera);

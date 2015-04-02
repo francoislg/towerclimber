@@ -45,10 +45,12 @@ public class PlatformHandler {
 	Gdx.app.log("Nouvelle plateforme", position.x + "/" + position.y);
     }
 
-    public void update(float topBound, float bottomBound) {
+    public void update() {
+	float topBound = world.getTopBound();
 	while (shouldGeneratePlatform(topBound)) {
 	    generatePlaform();
 	}
+	float bottomBound = world.getBottomBound();
 	while (shouldDeletePlatform(bottomBound)) {
 	    removeLastOne();
 	}
