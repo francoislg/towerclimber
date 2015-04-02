@@ -21,7 +21,7 @@ public class Character implements Controllable, Animable, Targetable {
 
     private final Vector2 size;
     private final Vector2 speed = new Vector2(1, 5);
-    private final float jumpForce = 200f;
+    private final float jumpForce = 30f;
     private Body body;
     private Fixture bodyFixture;
     private Fixture feets;
@@ -90,7 +90,7 @@ public class Character implements Controllable, Animable, Targetable {
 	}
 	if (bounds.isOutsideBounds(body.getPosition().x, size.x)) {
 	    Vector2 currentVelocity = body.getLinearVelocity();
-	    body.setLinearVelocity(-currentVelocity.x, currentVelocity.y);
+	    body.setLinearVelocity(-(currentVelocity.x / 2), currentVelocity.y);
 	}
     }
 
