@@ -5,6 +5,8 @@ import java.util.Random;
 import com.alexfr.game.box2dhelper.Conversion;
 import com.alexfr.game.box2dhelper.VectorInWorld;
 import com.alexfr.game.characters.Character;
+import com.alexfr.game.controllers.ControllersHandler;
+import com.alexfr.game.controllers.DebugClick;
 import com.alexfr.game.controllers.GameController;
 import com.alexfr.game.controllers.KeyboardController;
 import com.alexfr.game.rendering.CharacterRenderer;
@@ -23,7 +25,7 @@ public class GameWorld {
     private CharacterRenderer characterRenderer;
     private Camera camera;
     private CharactersTextureAtlas charactersTextureAtlas;
-    private GameController gameController;
+    private ControllersHandler controllers;
     private World world;
     private Box2DDebugRenderer debugRenderer;
     private Random seed;
@@ -45,16 +47,21 @@ public class GameWorld {
 	character = new Character(world, new VectorInWorld(Conversion.worldToPixels(TOTALWIDTHINWORLD) / 2, 0),
 		new Vector2(16, 16), worldBounds);
 	characterRenderer = new CharacterRenderer(character, charactersTextureAtlas);
-	gameController = new KeyboardController(character);
 	platformHandler = new PlatformHandler(world, worldBounds, seed);
 	camera = new Camera();
 	camera.setPosition(new Vector2(character.getPosition().x, 0));
-	// DebugClick debugClick = new DebugClick(camera);
+	
+	controllers = new ControllersHandler();
+	GameController gameController = new KeyboardController(character);
+	controllers.add(gameController);
+	DebugClick debugClick = new DebugClick(camera);
+	controllers.add(debugClick);
+	
 	debugRenderer = new Box2DDebugRenderer();
     }
 
     public void render() {
-	gameController.update();
+	controllers.update();
 	character.update();
 	float positionYWorld = character.getPosition().y;
 	float topBound = positionYWorld - Conversion.pixelsToWorld(500);

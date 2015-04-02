@@ -1,7 +1,5 @@
 package com.alexfr.game.controllers;
 
-import static com.badlogic.gdx.Gdx.input;
-
 import com.alexfr.game.Camera;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -13,7 +11,6 @@ public class DebugClick implements InputProcessor {
 
     public DebugClick(Camera camera) {
 	this.camera = camera;
-	input.setInputProcessor(this);
     }
 
     @Override

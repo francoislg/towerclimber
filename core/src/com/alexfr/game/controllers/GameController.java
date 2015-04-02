@@ -1,6 +1,8 @@
 package com.alexfr.game.controllers;
 
-public interface GameController {
+import com.badlogic.gdx.InputProcessor;
+
+public interface GameController extends InputProcessor {
     public void changeControllable(Controllable controllable);
 
     public void update();

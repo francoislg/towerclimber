@@ -1,11 +1,8 @@
 package com.alexfr.game.controllers;
 
-import static com.badlogic.gdx.Gdx.input;
-import static com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.Input.Keys;
 
-import com.badlogic.gdx.InputProcessor;
-
-public class KeyboardController implements GameController, InputProcessor {
+public class KeyboardController implements GameController {
 
     private Controllable controllable;
     private int leftKey = Keys.LEFT;
@@ -15,7 +12,6 @@ public class KeyboardController implements GameController, InputProcessor {
 
     public KeyboardController(Controllable controllable) {
 	pressableKeys = new PressableKeysHandler();
-	input.setInputProcessor(this);
 	this.controllable = controllable;
     }
 
