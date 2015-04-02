@@ -1,23 +1,24 @@
 package com.alexfr.game.characters;
 
-import com.alexfr.game.GameWorld;
-import com.alexfr.game.WorldBounds;
 import com.alexfr.game.box2dhelper.BodyBuilder;
+import com.alexfr.game.box2dhelper.Collidable;
 import com.alexfr.game.box2dhelper.CollisionsHandler;
-import com.alexfr.game.box2dhelper.Conversion;
 import com.alexfr.game.box2dhelper.FixtureBuilder;
 import com.alexfr.game.box2dhelper.GroundCollisionHandler;
 import com.alexfr.game.box2dhelper.PassThroughPlatformsCollisionHandler;
 import com.alexfr.game.box2dhelper.VectorInWorld;
 import com.alexfr.game.camera.Targetable;
+import com.alexfr.game.constants.Conversion;
 import com.alexfr.game.controllers.Controllable;
 import com.alexfr.game.rendering.Animable;
 import com.alexfr.game.rendering.RenderState;
+import com.alexfr.game.world.GameWorld;
+import com.alexfr.game.world.WorldBounds;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
 
-public class Character implements Controllable, Animable, Targetable {
+public class Character implements Controllable, Animable, Targetable, Collidable {
 
     private final Vector2 size;
     private final Vector2 speed = new Vector2(1, 5);

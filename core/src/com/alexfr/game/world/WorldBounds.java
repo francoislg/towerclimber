@@ -1,4 +1,4 @@
-package com.alexfr.game;
+package com.alexfr.game.world;
 
 import java.util.Random;
 

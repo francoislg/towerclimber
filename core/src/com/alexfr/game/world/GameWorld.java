@@ -1,7 +1,8 @@
-package com.alexfr.game;
+package com.alexfr.game.world;
 
 import java.util.Random;
 
+import com.alexfr.game.box2dhelper.WorldHandler;
 import com.alexfr.game.camera.Camera;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
@@ -11,7 +12,7 @@ import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.World;
 
-public class GameWorld {
+public class GameWorld implements WorldHandler {
     private final float TOTALWIDTHINWORLD = 200;
     private final float TIMESTEP = 1 / 60f;
     private final float SPEEDUP = 5;

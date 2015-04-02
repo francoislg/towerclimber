@@ -1,9 +1,9 @@
-package com.alexfr.game;
+package com.alexfr.game.world;
 
 import com.alexfr.game.box2dhelper.BodyBuilder;
-import com.alexfr.game.box2dhelper.Conversion;
 import com.alexfr.game.box2dhelper.FixtureBuilder;
 import com.alexfr.game.box2dhelper.VectorInWorld;
+import com.alexfr.game.constants.Conversion;
 import com.alexfr.game.rendering.Animable;
 import com.alexfr.game.rendering.RenderState;
 import com.badlogic.gdx.math.Vector2;

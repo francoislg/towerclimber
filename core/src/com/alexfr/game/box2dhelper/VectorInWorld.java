@@ -1,5 +1,6 @@
 package com.alexfr.game.box2dhelper;
 
+import com.alexfr.game.constants.Conversion;
 import com.badlogic.gdx.math.Vector2;
 
 public class VectorInWorld extends Vector2 {

@@ -5,13 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.alexfr.game.GameWorld;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import com.badlogic.gdx.physics.box2d.World;
 
 public class CollisionsHandler {
     private Map<Fixture, List<CollisionEvent>> collisions;
@@ -66,7 +64,7 @@ public class CollisionsHandler {
 	}
     };
 
-    public CollisionsHandler(GameWorld world) {
+    public CollisionsHandler(WorldHandler world) {
 	collisions = new HashMap<Fixture, List<CollisionEvent>>();
 	world.setContactListener(contactListener);
     }
@@ -76,9 +74,5 @@ public class CollisionsHandler {
 	    collisions.put(fixture, new ArrayList<CollisionEvent>());
 	}
 	collisions.get(fixture).add(collision);
-    }
-
-    public void setCollisionsInWorld(World world) {
-	world.setContactListener(contactListener);
     }
 }

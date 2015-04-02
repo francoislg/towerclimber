@@ -1,11 +1,11 @@
-package com.alexfr.game;
+package com.alexfr.game.world;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.alexfr.game.box2dhelper.Conversion;
 import com.alexfr.game.box2dhelper.VectorInWorld;
+import com.alexfr.game.constants.Conversion;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 

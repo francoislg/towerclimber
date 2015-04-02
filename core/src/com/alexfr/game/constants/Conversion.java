@@ -1,4 +1,4 @@
-package com.alexfr.game.box2dhelper;
+package com.alexfr.game.constants;
 
 import com.badlogic.gdx.math.Vector2;
 

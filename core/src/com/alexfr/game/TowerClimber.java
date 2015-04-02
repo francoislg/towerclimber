@@ -1,14 +1,16 @@
 package com.alexfr.game;
 
-import com.alexfr.game.box2dhelper.Conversion;
 import com.alexfr.game.camera.Camera;
 import com.alexfr.game.characters.Character;
+import com.alexfr.game.constants.Conversion;
 import com.alexfr.game.controllers.ControllersHandler;
 import com.alexfr.game.controllers.DebugClick;
 import com.alexfr.game.controllers.GameController;
 import com.alexfr.game.controllers.KeyboardController;
 import com.alexfr.game.rendering.CharacterRenderer;
 import com.alexfr.game.rendering.CharactersTextureAtlas;
+import com.alexfr.game.world.GameWorld;
+import com.alexfr.game.world.PlatformHandler;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.FPSLogger;

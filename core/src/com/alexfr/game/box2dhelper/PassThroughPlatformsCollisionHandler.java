@@ -1,15 +1,14 @@
 package com.alexfr.game.box2dhelper;
 
-import com.alexfr.game.characters.Character;
 import com.badlogic.gdx.physics.box2d.Contact;
 
 public class PassThroughPlatformsCollisionHandler implements CollisionEvent {
     private GroundCollisionHandler groundCollision;
-    private Character character;
+    private Collidable collidable;
 
-    public PassThroughPlatformsCollisionHandler(GroundCollisionHandler groundCollision, Character character) {
+    public PassThroughPlatformsCollisionHandler(GroundCollisionHandler groundCollision, Collidable collidable) {
 	this.groundCollision = groundCollision;
-	this.character = character;
+	this.collidable = collidable;
     }
 
     @Override
@@ -29,7 +28,7 @@ public class PassThroughPlatformsCollisionHandler implements CollisionEvent {
 
     @Override
     public void preSolve(Contact contact) {
-	if (!groundCollision.isTouchingThis(contact.getFixtureB()) || !character.isFallingDown()) {
+	if (!groundCollision.isTouchingThis(contact.getFixtureB()) || !collidable.isFallingDown()) {
 	    contact.setEnabled(false);
 	}
     }

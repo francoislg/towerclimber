@@ -1,6 +1,6 @@
 package com.alexfr.game.camera;
 
-import com.alexfr.game.box2dhelper.Conversion;
+import com.alexfr.game.constants.Conversion;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
