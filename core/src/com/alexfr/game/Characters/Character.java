@@ -3,13 +3,14 @@ package com.alexfr.game.characters;
 import com.alexfr.game.WorldBounds;
 import com.alexfr.game.box2dhelper.BodyBuilder;
 import com.alexfr.game.box2dhelper.CollisionsHandler;
+import com.alexfr.game.box2dhelper.Conversion;
 import com.alexfr.game.box2dhelper.FixtureBuilder;
 import com.alexfr.game.box2dhelper.GroundCollisionHandler;
 import com.alexfr.game.box2dhelper.PassThroughPlatformsCollisionHandler;
+import com.alexfr.game.box2dhelper.VectorInWorld;
 import com.alexfr.game.controllers.Controllable;
 import com.alexfr.game.rendering.Animable;
 import com.alexfr.game.rendering.RenderState;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
@@ -29,24 +30,17 @@ public class Character implements Controllable, Animable {
     private boolean canJump = false;
     private WorldBounds bounds;
 
-    public Character(World world, Vector2 position, Vector2 size,
-	    WorldBounds bounds) {
+    public Character(World world, VectorInWorld position, Vector2 size, WorldBounds bounds) {
 	this.size = size;
 	this.bounds = bounds;
-	this.body = new BodyBuilder().thatIsDynamic().atPosition(position)
-		.withFixedRotation().buildIn(world);
-	Gdx.app.log("Character position", position.x + "/" + position.y
-		+ " -- " + body.getPosition().x + "/" + body.getPosition().y);
-	this.bodyFixture = new FixtureBuilder().withABoxShape(size)
-		.withDensity(1f).buildIn(body);
-	this.feets = new FixtureBuilder()
-		.thatIsASensor()
-		.withABoxShape(new Vector2(size.x, 1), new Vector2(0, size.y),
-			0).buildIn(body);
+	this.body = new BodyBuilder().thatIsDynamic().atPosition(position).withFixedRotation().buildIn(world);
+	Vector2 boxSize = Conversion.halfVector(size);
+	this.bodyFixture = new FixtureBuilder().withABoxShape(boxSize).withDensity(1f).buildIn(body);
+	this.feets = new FixtureBuilder().thatIsASensor()
+		.withABoxShape(new Vector2(boxSize.x, 0.5f), new Vector2(0, boxSize.y), 0).buildIn(body);
 	this.collisions = new CollisionsHandler(world);
 	this.groundCollision = new GroundCollisionHandler();
-	this.passThroughPlaformsCollision = new PassThroughPlatformsCollisionHandler(
-		groundCollision);
+	this.passThroughPlaformsCollision = new PassThroughPlatformsCollisionHandler(groundCollision);
 	this.collisions.addCollision(groundCollision, feets);
 	this.collisions.addCollision(passThroughPlaformsCollision, bodyFixture);
     }
@@ -70,8 +64,7 @@ public class Character implements Controllable, Animable {
     public void jump() {
 	if (groundCollision.isTouchingGround() && canJump) {
 	    float impulse = body.getMass() * jumpForce;
-	    body.applyLinearImpulse(new Vector2(0, -impulse),
-		    body.getWorldCenter(), true);
+	    body.applyLinearImpulse(new Vector2(0, -impulse), body.getWorldCenter(), true);
 	    canJump = false;
 	}
     }
@@ -97,10 +90,6 @@ public class Character implements Controllable, Animable {
 	    Vector2 currentVelocity = body.getLinearVelocity();
 	    body.setLinearVelocity(-currentVelocity.x, currentVelocity.y);
 	}
-	/*
-	 * Gdx.app.log("Character position", body.getPosition().x + "/" +
-	 * body.getPosition().y);
-	 */
     }
 
     private boolean isFallingDown() {

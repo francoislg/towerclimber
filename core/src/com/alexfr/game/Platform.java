@@ -1,7 +1,9 @@
 package com.alexfr.game;
 
 import com.alexfr.game.box2dhelper.BodyBuilder;
+import com.alexfr.game.box2dhelper.Conversion;
 import com.alexfr.game.box2dhelper.FixtureBuilder;
+import com.alexfr.game.box2dhelper.VectorInWorld;
 import com.alexfr.game.rendering.Animable;
 import com.alexfr.game.rendering.RenderState;
 import com.badlogic.gdx.math.Vector2;
@@ -12,10 +14,9 @@ public class Platform implements Animable {
     private Body body;
     private Vector2 size;
 
-    public Platform(World world, Vector2 position, Vector2 size) {
-	this.body = new BodyBuilder().thatIsStatic()
-		.atPosition(new Vector2(position.x, position.y)).buildIn(world);
-	new FixtureBuilder().withABoxShape(size).buildIn(body);
+    public Platform(World world, VectorInWorld position, Vector2 size) {
+	this.body = new BodyBuilder().thatIsStatic().atPosition(position).buildIn(world);
+	new FixtureBuilder().withABoxShape(Conversion.halfVector(size)).buildIn(body);
     }
 
     public void destroy() {

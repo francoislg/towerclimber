@@ -20,7 +20,7 @@ public class Camera {
     public Camera(int width, int height) {
 	camera = new OrthographicCamera(width, height);
 	camera.setToOrtho(true, width, height);
-	camera.zoom = Conversion.metersToPixels(1);
+	camera.zoom = Conversion.worldToPixels(1);
 	camera.update();
     }
 

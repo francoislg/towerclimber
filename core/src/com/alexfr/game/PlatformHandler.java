@@ -5,15 +5,16 @@ import java.util.List;
 import java.util.Random;
 
 import com.alexfr.game.box2dhelper.Conversion;
+import com.alexfr.game.box2dhelper.VectorInWorld;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class PlatformHandler {
 
-    private final float offsetForNewPlatform = 300;
-    private final float offsetForDeletingPlatform = 1000;
-    private final float distanceBetweenPlatforms = 50;
+    private final float offsetForNewPlatform = Conversion.pixelsToWorld(300);
+    private final float offsetForDeletingPlatform = Conversion.pixelsToWorld(1000);
+    private final float distanceBetweenPlatforms = Conversion.pixelsToWorld(10);
 
     private World world;
     private WorldBounds worldBounds;
@@ -26,8 +27,7 @@ public class PlatformHandler {
 	this(world, worldBounds, new Random());
     }
 
-    public PlatformHandler(World world, WorldBounds worldBounds,
-	    Random randomizer) {
+    public PlatformHandler(World world, WorldBounds worldBounds, Random randomizer) {
 	this.world = world;
 	this.worldBounds = worldBounds;
 	this.randomizer = randomizer;
@@ -36,11 +36,10 @@ public class PlatformHandler {
     }
 
     public void generatePlaform() {
-	Vector2 position = new Vector2(
-		worldBounds.getRandomNumberInBounds(randomizer),
-		Conversion.pixelsToMeters(topMostPlatformY)
-			- distanceBetweenPlatforms);
-	Vector2 size = new Vector2(100, 3);
+	VectorInWorld position = new VectorInWorld(Conversion.worldToPixels(worldBounds
+		.getRandomNumberInBounds(randomizer)), Conversion.worldToPixels(topMostPlatformY
+		- distanceBetweenPlatforms));
+	Vector2 size = new Vector2(50, 3);
 	Platform platform = new Platform(world, position, size);
 	topMostPlatformY = platform.getPosition().y;
 	if (platforms.isEmpty()) {
@@ -65,7 +64,7 @@ public class PlatformHandler {
 	    Platform removed = platforms.remove(0);
 	    removed.destroy();
 	    if (!platforms.isEmpty()) {
-		bottomMostPlatformY = platforms.get(0).getPosition().y;
+		bottomMostPlatformY = Conversion.worldToPixels(platforms.get(0).getPosition().y);
 	    } else {
 		Gdx.app.log("platforms", "NO MORE PLATFORMS OMG");
 	    }
@@ -73,9 +72,7 @@ public class PlatformHandler {
     }
 
     private boolean shouldDeletePlatform(float bottomBound) {
-	return !platforms.isEmpty()
-		&& bottomMostPlatformY > bottomBound
-			+ offsetForDeletingPlatform;
+	return !platforms.isEmpty() && bottomMostPlatformY > bottomBound + offsetForDeletingPlatform;
     }
 
     private boolean shouldGeneratePlatform(float topBound) {

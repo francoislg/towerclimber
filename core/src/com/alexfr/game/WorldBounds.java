@@ -7,9 +7,9 @@ public class WorldBounds {
     private final float rightBound;
     private final Random randomizer;
 
-    public WorldBounds(float leftBound, float rightBound) {
-	this.leftBound = leftBound;
-	this.rightBound = rightBound;
+    public WorldBounds(float leftBoundInWorld, float rightBoundInWorld) {
+	this.leftBound = leftBoundInWorld;
+	this.rightBound = rightBoundInWorld;
 	this.randomizer = new Random();
     }
 
