@@ -37,10 +37,10 @@ public class Character implements Controllable, Animable {
 	Vector2 boxSize = Conversion.halfVector(size);
 	this.bodyFixture = new FixtureBuilder().withABoxShape(boxSize).withDensity(1f).buildIn(body);
 	this.feets = new FixtureBuilder().thatIsASensor()
-		.withABoxShape(new Vector2(boxSize.x, 0.5f), new Vector2(0, boxSize.y), 0).buildIn(body);
+		.withABoxShape(new Vector2(boxSize.x * 0.8f, 0.5f), new Vector2(0, boxSize.y), 0).buildIn(body);
 	this.collisions = new CollisionsHandler(world);
 	this.groundCollision = new GroundCollisionHandler();
-	this.passThroughPlaformsCollision = new PassThroughPlatformsCollisionHandler(groundCollision);
+	this.passThroughPlaformsCollision = new PassThroughPlatformsCollisionHandler(groundCollision, this);
 	this.collisions.addCollision(groundCollision, feets);
 	this.collisions.addCollision(passThroughPlaformsCollision, bodyFixture);
     }
@@ -92,7 +92,7 @@ public class Character implements Controllable, Animable {
 	}
     }
 
-    private boolean isFallingDown() {
+    public boolean isFallingDown() {
 	return body.getLinearVelocity().y >= 0.0f;
     }
 
