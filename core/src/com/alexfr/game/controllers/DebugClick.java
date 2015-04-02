@@ -1,6 +1,6 @@
 package com.alexfr.game.controllers;
 
-import com.alexfr.game.Camera;
+import com.alexfr.game.camera.Camera;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.alexfr.game.GameWorld;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
@@ -65,7 +66,7 @@ public class CollisionsHandler {
 	}
     };
 
-    public CollisionsHandler(World world) {
+    public CollisionsHandler(GameWorld world) {
 	collisions = new HashMap<Fixture, List<CollisionEvent>>();
 	world.setContactListener(contactListener);
     }

@@ -25,4 +25,8 @@ public class WorldBounds {
 	float range = rightBound - leftBound;
 	return leftBound + (randomizer.nextFloat() * range);
     }
+
+    public float getMiddle() {
+	return (rightBound - leftBound) / 2;
+    }
 }

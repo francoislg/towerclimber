@@ -8,7 +8,6 @@ import com.alexfr.game.box2dhelper.Conversion;
 import com.alexfr.game.box2dhelper.VectorInWorld;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.World;
 
 public class PlatformHandler {
 
@@ -16,29 +15,26 @@ public class PlatformHandler {
     private final float offsetForDeletingPlatform = Conversion.pixelsToWorld(1000);
     private final float distanceBetweenPlatforms = Conversion.pixelsToWorld(10);
 
-    private World world;
-    private WorldBounds worldBounds;
+    private GameWorld world;
     private Random randomizer;
     private List<Platform> platforms;
     private float topMostPlatformY = offsetForNewPlatform;
     private float bottomMostPlatformY = 0;
 
-    public PlatformHandler(World world, WorldBounds worldBounds) {
-	this(world, worldBounds, new Random());
+    public PlatformHandler(GameWorld world) {
+	this(world, world.getRandomizer());
     }
 
-    public PlatformHandler(World world, WorldBounds worldBounds, Random randomizer) {
+    public PlatformHandler(GameWorld world, Random randomizer) {
 	this.world = world;
-	this.worldBounds = worldBounds;
 	this.randomizer = randomizer;
 	this.platforms = new ArrayList<Platform>();
 	generatePlaform();
     }
 
     public void generatePlaform() {
-	VectorInWorld position = new VectorInWorld(Conversion.worldToPixels(worldBounds
-		.getRandomNumberInBounds(randomizer)), Conversion.worldToPixels(topMostPlatformY
-		- distanceBetweenPlatforms));
+	VectorInWorld position = new VectorInWorld(Conversion.worldToPixels(world.getBounds().getRandomNumberInBounds(
+		randomizer)), Conversion.worldToPixels(topMostPlatformY - distanceBetweenPlatforms));
 	Vector2 size = new Vector2(50, 3);
 	Platform platform = new Platform(world, position, size);
 	topMostPlatformY = platform.getPosition().y;

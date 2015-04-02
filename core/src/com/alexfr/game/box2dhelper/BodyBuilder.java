@@ -1,10 +1,10 @@
 package com.alexfr.game.box2dhelper;
 
+import com.alexfr.game.GameWorld;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.badlogic.gdx.physics.box2d.World;
 
 public class BodyBuilder {
     private BodyDef bodyDef;
@@ -48,7 +48,7 @@ public class BodyBuilder {
 	return this;
     }
 
-    public Body buildIn(World world) {
+    public Body buildIn(GameWorld world) {
 	Body body = world.createBody(bodyDef);
 	body.setTransform(position, angle);
 	return body;

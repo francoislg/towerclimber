@@ -14,7 +14,7 @@ public class Platform implements Animable {
     private Body body;
     private Vector2 size;
 
-    public Platform(World world, VectorInWorld position, Vector2 size) {
+    public Platform(GameWorld world, VectorInWorld position, Vector2 size) {
 	this.body = new BodyBuilder().thatIsStatic().atPosition(position).buildIn(world);
 	new FixtureBuilder().withABoxShape(Conversion.halfVector(size)).buildIn(body);
     }
